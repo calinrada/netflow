@@ -35,6 +35,13 @@ class MainTask extends \Phalcon\CLI\Task
 		                 $impsrcaddr = implode('.', $srcaddr);
 		                 $impdstaddr = implode('.', $dstaddr);
 
+		                 $data  = [
+					"netflow" => [
+					"error" => true,  "error" => [
+					"src ipAddr" => $impsrcaddr],[
+					"code" => "src"]]];
+    
+                                echo json_encode($data),PHP_EOL;
 		            } 
 		         }
 		    });
@@ -42,5 +49,5 @@ class MainTask extends \Phalcon\CLI\Task
 
 
 	$loop->run();
-  }
+    }
 }
