@@ -87,4 +87,9 @@ class MainTask extends \Phalcon\CLI\Task
     $loop->run();
     
    }
+   
+   public function VersionNineAction() {
+
+         echo "\n Decoding Netflow v9 packets \n". PHP_EOL; 
+   }
 }         
