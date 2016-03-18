@@ -1,4 +1,5 @@
 <?php
+
 namespace MyApp;
 use Ratchet\ConnectionInterface;
 use Ratchet\Wamp\WampServerInterface;
