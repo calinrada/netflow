@@ -12,7 +12,9 @@ class MainTask extends \Phalcon\CLI\Task
     public function VersionFiveAction() {
 
         $loop = React\EventLoop\Factory::create();
+          
           $factory = new React\Datagram\Factory($loop);
+	  
 	      $factory->createServer('localhost:1234')->then(function (React\Datagram\Socket $server) {
 		    
 		$server->on('message', function($message) {
