@@ -74,13 +74,18 @@ class MainTask extends \Phalcon\CLI\Task
 		        $impsrcaddr = implode('.', $srcaddr);
 		        $impdstaddr = implode('.', $dstaddr);
 		        
-		        $data  = ["netflow" => ["error" => true,  "error" => 
-		                 ["src ipAddr" => $impsrcaddr],
-		                 ["dst ipAddr" => $impdstaddr],
-		                 ["src port" => $flowdata['srcport'],
-		                 ["dst port" => $flowdata['dstport']]]]];
-    
-                            echo json_encode($data),PHP_EOL;
+                             	     $entryData = array(
+			                 'category'   => 'FlowData'
+			               , 'srcIp'      =>  $impsrcaddr
+			               , 'dstIp'      => $impdstaddr 
+			               , 'srcPort'    => $flowdata['srcport'],
+			                 'dstPort'    => $flowdata['dstport']
+                                     );
+
+			         $context = new ZMQContext();
+			         $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
+			         $socket->connect("tcp://192.168.0.109:5555");
+			         $socket->send(json_encode($entryData));
 		       } 
 		     }
 		  });
