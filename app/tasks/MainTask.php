@@ -6,9 +6,7 @@ class MainTask extends \Phalcon\CLI\Task
 {
     public function mainAction() {
          
-
-        echo "\n Decoding Netflow packets \n";
-    
+        echo "\n Decoding Netflow packets \n". PHP_EOL;
     }
 
     public function VersionFiveAction() {
