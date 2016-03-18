@@ -26,32 +26,44 @@ class MainTask extends \Phalcon\CLI\Task
 		     $v5_header_len = 24;
 		     $v5_flowrec_len = 48;
 		 
-		$header = unpack('nversion/ncount/Nsysuptime/Nunix_secs/Nunix_nsecs/Nflow_sequence/Cengine_type/Cengine_id/nsampling_interval', substr($message, 0, 24));
-		          
-		$count = $header['count'];
+		$header = 
+		     'nversion/' .    # NetFlow export format version number
+		     'ncount/' .      # Number of flows exported in this packet (1-30)
+		     'Nsysuptime/' .  # Current time in milliseconds since the export device booted
+		     'Nunix_secs/' .  # Current count of seconds since 0000 UTC 1970
+		     'Nunix_nsecs/' . # Residual nanoseconds since 0000 UTC 1970
+		     'Nflow_sequence/' . # Sequence counter of total flows seen
+		     'Cengine_type/' .   # Type of flow-switching engine
+		     'Cengine_id/' .     # Slot number of the flow-switching engine
+		     'nsampling_interval/'; # First two bits hold the sampling mode; remaining 14 bits hold value of sampling interval
+
+        
+        $unpack_header = unpack($header, substr($message, 0, 24));
+
+		$count = $unpack_header['count'];
 		 
 	for ($i = 0; $i < $count; $i++) {
 		
 		$flowrec = substr($message, $v5_header_len + ($i * $v5_flowrec_len), $v5_flowrec_len);
 		
 		$header_format = 
-                       'C4srcaddr/' .   # Source IP address
-                       'C4dstaddr/' .   # Destination IP address
-                       'C4nexthop/' .   # IP address of next hop router
-                       'ninput/' .      # SNMP index of input interface
-                       'noutput/' .     # SNMP index of output interface
-                       'NdPkts/' .      # Packets in the flow
-                       'NdOctets/' .    # Total number of Layer 3 bytes in the packets of the flow
-                       'NFirst/' .      # SysUptime at start of flow
-                       'NLast/' .       # SysUptime at the time the last packet of the flow was received
-                       'nsrcport/' .    # TCP/UDP source port number or equivalent            
-                       'ndstport/' .    # TCP/UDP destination port number or equivalent
-                       'Cblank/' .      # TCP/UDP destination port number or equivalent
-                       'Ctcp_flags/' .  # Cumulative OR of TCP flags
-                       'Cprot/' .       # IP protocol type (for example, TCP = 6; UDP = 17)
-                       'nsrc_as/' .     # Autonomous system number of the source, either origin or peer
-                       'Csrc_mask/' .   # Source address prefix mask bits
-                       'Cdst_mask';     # Destination address prefix mask bits
+                     'C4srcaddr/' .   # Source IP address
+                     'C4dstaddr/' .   # Destination IP address
+                     'C4nexthop/' .   # IP address of next hop router
+                     'ninput/' .      # SNMP index of input interface
+                     'noutput/' .     # SNMP index of output interface
+                     'NdPkts/' .      # Packets in the flow
+                     'NdOctets/' .    # Total number of Layer 3 bytes in the packets of the flow
+                     'NFirst/' .      # SysUptime at start of flow
+                     'NLast/' .       # SysUptime at the time the last packet of the flow was received
+                     'nsrcport/' .    # TCP/UDP source port number or equivalent            
+                     'ndstport/' .    # TCP/UDP destination port number or equivalent
+                     'Cblank/' .      # TCP/UDP destination port number or equivalent
+                     'Ctcp_flags/' .  # Cumulative OR of TCP flags
+                     'Cprot/' .       # IP protocol type (for example, TCP = 6; UDP = 17)
+                     'nsrc_as/' .     # Autonomous system number of the source, either origin or peer
+                     'Csrc_mask/' .   # Source address prefix mask bits
+                     'Cdst_mask';     # Destination address prefix mask bits
                 /* Unpack the header data */
                 $flowdata = unpack ($header_format, $flowrec);
 
@@ -64,13 +76,13 @@ class MainTask extends \Phalcon\CLI\Task
 		                 ["src ipAddr" => $impsrcaddr],
 		                 ["code" => "src"]]];
     
-                              echo json_encode($data),PHP_EOL;
+                            echo json_encode($data),PHP_EOL;
 		       } 
 		     }
 		  });
-	    });
+	       });
     
     $loop->run();
     
    }
-}
+}         
