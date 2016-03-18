@@ -12,8 +12,8 @@ class MainTask extends \Phalcon\CLI\Task
     public function VersionFiveAction() {
 
         $loop = React\EventLoop\Factory::create();
-        $factory = new React\Datagram\Factory($loop);
-		$factory->createServer('localhost:1234')->then(function (React\Datagram\Socket $server) {
+          $factory = new React\Datagram\Factory($loop);
+	      $factory->createServer('localhost:1234')->then(function (React\Datagram\Socket $server) {
 		    
 		$server->on('message', function($message) {
 		        
@@ -68,8 +68,10 @@ class MainTask extends \Phalcon\CLI\Task
 		               
 		        $srcaddr = array($flowdata['srcaddr1'],$flowdata['srcaddr2'],$flowdata['srcaddr3'],$flowdata['srcaddr4']);
 		        $dstaddr = array($flowdata['dstaddr1'],$flowdata['dstaddr2'],$flowdata['dstaddr3'],$flowdata['dstaddr4']);
+		        
 		        $impsrcaddr = implode('.', $srcaddr);
 		        $impdstaddr = implode('.', $dstaddr);
+		        
 		        $data  = ["netflow" => ["error" => true,  "error" => 
 		                 ["src ipAddr" => $impsrcaddr],
 		                 ["dst ipAddr" => $impdstaddr],
