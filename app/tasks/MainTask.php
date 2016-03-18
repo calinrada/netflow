@@ -78,14 +78,16 @@ class MainTask extends \Phalcon\CLI\Task
 			               , 'srcPort'    =>  $flowdata['srcport'],
 			                 'dstPort'    =>  $flowdata['dstport']
                         );
-                # ZeroMQ connection to our socket server and delivered a serialized message with the same information
+        
+        # ZeroMQ connection to our socket server and delivered a serialized message with the same information
+	
 			    $context = new ZMQContext();
 			    $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
 			    $socket->connect("tcp://localhost:5555");
 			    $socket->send(json_encode($entryData));
 
-		   } 
-		 }
+		 } 
+	      }
 	  });
 	});
     
