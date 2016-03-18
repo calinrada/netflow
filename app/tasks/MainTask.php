@@ -74,7 +74,9 @@ class MainTask extends \Phalcon\CLI\Task
 		        $impdstaddr = implode('.', $dstaddr);
 		        $data  = ["netflow" => ["error" => true,  "error" => 
 		                 ["src ipAddr" => $impsrcaddr],
-		                 ["code" => "src"]]];
+		                 ["dst ipAddr" => $impdstaddr],
+		                 ["src port" => $flowdata['srcport'],
+		                 ["dst port" => $flowdata['dstport']]]]];
     
                             echo json_encode($data),PHP_EOL;
 		       } 
