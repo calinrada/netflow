@@ -90,6 +90,6 @@ return new \Phalcon\Config(array(
 Usage
 
 ```
-php cli.php
+php cli.php main VersionFive
 ```
 
