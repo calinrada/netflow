@@ -1,12 +1,12 @@
 # netflow
 Decoding Netflow v5 packets 
 
-Flow formats,Vendor,Supported versions,Supported traffic types
-==============================================================
+Flow version support
 
-```
-NetFlow, Cisco, 5,IPv4
-```
+* NetFlow
+* version 5
+* Vendor cisco
+* Supported traffic types IPv4
 
 ## require 
 
