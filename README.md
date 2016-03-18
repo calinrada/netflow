@@ -1,6 +1,13 @@
 # netflow
 Decoding Netflow v5 packets 
 
+Flow formats,Vendor,Supported versions,Supported traffic types
+==============================================================
+
+```
+NetFlow, Cisco, 5,IPv4
+```
+
 ## require 
 
 Setup Netflow exporter with fprobe
