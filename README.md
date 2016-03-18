@@ -34,7 +34,7 @@ start fprobe
 service fprobe start
 ```
 
-install php packages
+install php packages and extensions
 
 * ZeroMQ
 * React/ZMQ
