@@ -1,4 +1,5 @@
 <?php
+    
     require dirname(__DIR__) . '/vendor/autoload.php';
 
     $loop   = React\EventLoop\Factory::create();
@@ -7,7 +8,7 @@
     // Listen for the web server to make a ZeroMQ push after an ajax request
     $context = new React\ZMQ\Context($loop);
     $pull = $context->getSocket(ZMQ::SOCKET_PULL);
-    $pull->bind('tcp://localhost:5555'); // Binding to 127.0.0.1 means the only client that can connect is itself
+    $pull->bind('tcp://192.168.0.109:5555'); // Binding to 127.0.0.1 means the only client that can connect is itself
     $pull->on('message', array($pusher, 'onBlogEntry'));
 
     // Set up our WebSocket server for clients wanting real-time updates
