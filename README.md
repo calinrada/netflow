@@ -38,6 +38,7 @@ install php packages and extensions
 
 * ZeroMQ
 * React/ZMQ
+* ratchet
 * PhalconPHP
 
 ZeroMQ
@@ -46,11 +47,6 @@ ZeroMQ
 sudo pecl install zmq-beta
 ```
 
-React/ZMQ
-=========
-```
-composer require react/zmq
-```
 Phalcon
 ========
 
@@ -64,8 +60,26 @@ And Just clone the repo
 git clone https://github.com/ch3k1/netflow
 ```
 
-I will be storing the flows in a MySQL database
+in ```/var/www/html/netflow/app/libraries``` create composer.json file
 
+```
+{
+    "autoload": {
+        "psr-0": {
+            "MyApp": "src"
+        }
+    },
+    "require": {
+        "cboden/ratchet": "0.3.*",
+        "react/zmq": "0.2.*|0.3.*",
+        "react/datagram": "^1.0"
+    }
+}
+```
+
+composer install
+
+I will be storing the flows in a MySQL database
 database default config
 
 ```
