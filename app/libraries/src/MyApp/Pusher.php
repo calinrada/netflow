@@ -18,7 +18,8 @@ class Pusher implements WampServerInterface {
     public function onFlowData($entry) {
 
         $entryData = json_decode($entry, true);
-        var_dump($entryData);
+        
+        print_r($entryData);
 
         if (!array_key_exists($entryData['category'], $this->subscribedTopics)) {
             return;
@@ -31,12 +32,15 @@ class Pusher implements WampServerInterface {
     }
 
     public function onUnSubscribe(ConnectionInterface $conn, $topic) {
+    
     }
 
     public function onOpen(ConnectionInterface $conn) {
+    
     }
 
     public function onClose(ConnectionInterface $conn) {
+    
     }
 
     public function onCall(ConnectionInterface $conn, $id, $topic, array $params) {
@@ -50,5 +54,6 @@ class Pusher implements WampServerInterface {
     }
  
    public function onError(ConnectionInterface $conn, \Exception $e) {
+    
     }
 }
