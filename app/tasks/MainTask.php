@@ -78,6 +78,38 @@ class MainTask extends \Phalcon\CLI\Task
 			               , 'srcPort'    =>  $flowdata['srcport'],
 			                 'dstPort'    =>  $flowdata['dstport']
                         );
+                        
+               /* create flow record in database (ORM) */
+            
+                            $netflow = new Netflows();
+		            $netflow->router_id = 1;
+		            $netflow->src_ipn = $impsrcaddr;
+		            $netflow->dst_ipn = $impdstaddr; 
+		            $netflow->nxt_ipn = $flowdata['nexthop1'];
+		            $netflow->ifin = $flowdata['input'];
+		            $netflow->ifout =  $flowdata['output'];
+		            $netflow->packets = $flowdata['dPkts']; 
+		            $netflow->octets = $flowdata['dOctets'];
+		            $netflow->starttime = $flowdata['First'];
+		            $netflow->endtime = $flowdata['Last'];
+		            $netflow->srcport = $flowdata['srcport'];
+		            $netflow->dstport = $flowdata['dstport'];
+		            $netflow->tcp = $flowdata['tcp_flags'];
+		            $netflow->prot = $flowdata['prot'];
+		            $netflow->tos = $flowdata['tos'];
+		            $netflow->srcas = $flowdata['src_as'];
+		            $netflow->dstas = $flowdata['dst_as'];
+		            $netflow->srcmask = $flowdata['src_mask'];
+		            $netflow->dstmask = $flowdata['dst_mask'];
+
+			if ($netflow->save() == false) {
+
+			    echo 'Umh, We can not store flows right now'. PHP_EOL;
+						    
+			} else {
+						    
+				echo "Great, a new flows was created successfully!" . PHP_EOL;
+			}
         
         # ZeroMQ connection to our socket server and delivered a serialized message with the same information
 	
