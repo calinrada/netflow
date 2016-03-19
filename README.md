@@ -101,9 +101,52 @@ return new \Phalcon\Config(array(
 ));
 ```
 
-Usage
+run collector
 
 ```
 php cli.php main VersionFive
 ```
 
+run server in bin folder
+
+```
+php server.php
+```
+
+result
+
+```
+Array
+(
+    [category] => FlowData
+    [srcIp] => 192.30.252.90
+    [dstIp] => 192.168.0.109
+    [srcPort] => 443
+    [dstPort] => 41173
+)
+Array
+(
+    [category] => FlowData
+    [srcIp] => 118.238.98.196
+    [dstIp] => 192.168.0.109
+    [srcPort] => 47800
+    [dstPort] => 48750
+)
+Array
+(
+    [category] => FlowData
+    [srcIp] => 192.168.0.109
+    [dstIp] => 118.238.98.196
+    [srcPort] => 48750
+    [dstPort] => 47800
+)
+Array
+(
+    [category] => FlowData
+    [srcIp] => 83.254.118.27
+    [dstIp] => 192.168.0.109
+    [srcPort] => 50428
+    [dstPort] => 45005
+)
+
+```
