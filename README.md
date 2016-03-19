@@ -3,7 +3,7 @@ Decoding Netflow v5 packets
 
 #topology
 
-![alt tag](http://i.imgur.com/l8InBjB.jpg)
+![alt tag](http://i.imgur.com/CUOmBZH.jpg)
 
 Flow version support
 
