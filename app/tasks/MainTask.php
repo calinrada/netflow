@@ -58,7 +58,9 @@ class MainTask extends \Phalcon\CLI\Task
             'Cblank/' .      # TCP/UDP destination port number or equivalent
             'Ctcp_flags/' .  # Cumulative OR of TCP flags
             'Cprot/' .       # IP protocol type (for example, TCP = 6; UDP = 17)
+            'Ctos/' .        # IP type of service (ToS)
             'nsrc_as/' .     # Autonomous system number of the source, either origin or peer
+            'ndst_as/' .     # Autonomous system number of the destination, either origin or peer
             'Csrc_mask/' .   # Source address prefix mask bits
             'Cdst_mask';     # Destination address prefix mask bits
          
